@@ -23,9 +23,6 @@ file1 = st.file_uploader("Upload Roaming SC Completion (Excel)", type=["xls", "x
 file2 = st.file_uploader("Upload Product Spec Roaming (Excel)", type=["xls", "xlsx"])
 file5 = st.file_uploader("Upload All MRID (Excel)", type=["xls", "xlsx"])  # Ensure this is correctly uploaded
 
-if st.button("Process Files"):
-    process_files(file1, file2, file5)
-
 # Function to get ruleset names based on POID
 def get_ruleset_names(file5_df, po_id):
     """
@@ -65,7 +62,7 @@ def get_ruleset_names(file5_df, po_id):
 
 # Function to process the uploaded files and provide download link
 def process_files(file1, file2, file5):
-    if file1 is not None and file2 is not None:
+    if file1 is not None and file2 is not None and file5 is not None:
         # Load input files
         file1_df = pd.read_excel(file1)
         file2_df = pd.read_excel(file2)
