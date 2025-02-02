@@ -199,7 +199,7 @@ def process_files(file1, file2):
                         # Create DDM-Rule
                         ddm_rule_data ={
                             "Keyword": [row["Keywords"],row["Keywords"], "AKTIF_P26", "AKTIF", row["Keywords"], row["Keywords"],row["Keywords"],row["Keywords"], "AKTIF_P26", "AKTIF", row["Keywords"], row["Keywords"]],
-                            "Ruleset ShortName": : [
+                            "Ruleset ShortName": [
                                 ruleset_names[0], ruleset_names[0],  # 00PRE00, 00PRE00
                                 ruleset_names[1], ruleset_names[1],  # 00ACT00, 00ACT00 (repeated)
                                 ruleset_names[2], ruleset_names[2],  # remaining_rule, remaining_rule
