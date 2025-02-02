@@ -301,14 +301,14 @@ def process_files(file1, file2, file5):
                             "PREACT_SUBS": [
                                 "",
                                 "",
-                                ruleset_names[0],
-                                ruleset_names[0],
+                                f"IN|{ruleset_names[0]}"
+                                f"IN|{ruleset_names[0]}"
                                 "",
                                 "",
                                 "",
                                 "",
-                                ruleset_names[3],
-                                ruleset_names[3],
+                                f"IN|{ruleset_names[3]}"
+                                f"IN|{ruleset_names[3]}"
                                 "",
                                 ""
                             ]
@@ -470,15 +470,12 @@ def process_files(file1, file2, file5):
                         library_addon_headers = ["Ruleset ShortName", "Parentpoid", "Offerid", "daid", "Benefit Name", "Value", "Zone"]
                         library_addon_da_data = []  # Initialize as an empty list to store rows
 
-                        # Define the ruleset suffixes
-                        ruleset_suffixes = ["MRPRE00", "MRACT00", "MR00000", "MRGFPRE00", "MRGFACT00", "MRGF00000"]
-
                         # Repeat Quota data 6 times with ruleset
                         if safe_int(row.get("Quota", 0)) > 0:
                             quota_value = safe_int(row["Quota"]) * 1073741824  # Convert quota to bytes
-                            for ruleset_name in ruleset_names:
+                            for i in range(len(ruleset_names)):
                                 library_addon_da_data.append({
-                                    "Ruleset ShortName": ruleset_name,  # Append ruleset suffix to POID
+                                    "Ruleset ShortName": ruleset_names[i],  # Append ruleset suffix to POID
                                     "Parentpoid": po_id_from_file1,
                                     "Quota Name": "DataRoaming",  # Fixed string "DataRoaming"
                                     "daid": "30100",  # Fixed string "30100"
@@ -503,9 +500,9 @@ def process_files(file1, file2, file5):
                                 package_validity = str(row.get("Package Validity", "")).strip()
                                 parentpoid = "PO_ADO_CALLBACKHOME_" + poid_parts[4] + "_" + package_validity + "D"
                                 voice_value = safe_int(row["Voice"]) * 60  # Convert voice value to seconds
-                                for suffix in ruleset_suffixes:
+                                for i in range(len(ruleset_names)):
                                     library_addon_da_data.append({
-                                        "Ruleset ShortName": ruleset_name,  # Append ruleset suffix to POID
+                                        "Ruleset ShortName": ruleset_names[i],  # Append ruleset suffix to POID
                                         "Parentpoid": parentpoid,
                                         "Quota Name": "VoiceRoamingCallBackHome",  # Fixed string "DataRoaming"
                                         "daid": "30194",  # Fixed string "30100"
