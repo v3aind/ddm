@@ -632,7 +632,7 @@ def process_files(file1, file2, file5):
                     )
 
     else:
-        st.warning("Please upload both files to proceed.")
+        st.warning("Please upload all files to proceed.")
 
 # Call the process function if both files are uploaded
 if file1 is not None and file2 is not None:
