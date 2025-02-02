@@ -3,12 +3,28 @@ import pandas as pd
 import streamlit as st
 import io
 
-# Streamlit interface for file uploads
+def process_files(file1, file2, file5):
+    if file5 is None:
+        st.error("Please upload file5 before proceeding.")
+        return  # Stop the function if file5 is missing
+    
+    # Load input files
+    file1_df = pd.read_excel(file1)
+    file2_df = pd.read_excel(file2)
+    file5_df = pd.read_excel(file5)  # This now runs only if file5 is uploaded
+
+    # Further processing...
+    st.success("Files processed successfully!")
+
+# Streamlit app
 st.title('DDM File Generator (Roaming SC with Gift)')
 
-file1 = st.file_uploader("Upload Roaming_SC_Completion.xlsx", type=["xlsx"])
-file2 = st.file_uploader("Upload Product Spec Roaming.xlsx", type=["xlsx"])
-file5 = st.file_uploader("Upload All MRID.xlsx", type=["xlsx"])
+file1 = st.file_uploader("Upload File 1 (Excel)", type=["xls", "xlsx"])
+file2 = st.file_uploader("Upload File 2 (Excel)", type=["xls", "xlsx"])
+file5 = st.file_uploader("Upload File 5 (Excel)", type=["xls", "xlsx"])  # Ensure this is correctly uploaded
+
+if st.button("Process Files"):
+    process_files(file1, file2, file5)
 
 # Function to get ruleset names based on POID
 def get_ruleset_names(file5_df, po_id):
