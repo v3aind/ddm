@@ -199,7 +199,14 @@ def process_files(file1, file2):
                         # Create DDM-Rule
                         ddm_rule_data ={
                             "Keyword": [row["Keywords"],row["Keywords"], "AKTIF_P26", "AKTIF", row["Keywords"], row["Keywords"],row["Keywords"],row["Keywords"], "AKTIF_P26", "AKTIF", row["Keywords"], row["Keywords"]],
-                            "Ruleset ShortName": ruleset_names * 2,
+                            "Ruleset ShortName": : [
+                                ruleset_names[0], ruleset_names[0],  # 00PRE00, 00PRE00
+                                ruleset_names[1], ruleset_names[1],  # 00ACT00, 00ACT00 (repeated)
+                                ruleset_names[2], ruleset_names[2],  # remaining_rule, remaining_rule
+                                ruleset_names[3], ruleset_names[3],  # GFPRE00, GFPRE00
+                                ruleset_names[4], ruleset_names[4],  # GFACT00, GFACT00
+                                ruleset_names[5], ruleset_names[5]   # GF00, GF00
+                            ],
                             "ACTIVE_SUBS": [""] * 12,
                             "OpIndex":[3,4,1,1,1,2,7,8,2,2,5,6],
                             "SALES_AREA": [""] * 12,
@@ -281,14 +288,14 @@ def process_files(file1, file2):
                             "PREACT_SUBS": [
                                 "",
                                 "",
-                                f"IN|{po_id_from_file1}:MRPRE00",
-                                f"IN|{po_id_from_file1}:MRPRE00",
+                                ruleset_names[0],
+                                ruleset_names[0],
                                 "",
                                 "",
                                 "",
                                 "",
-                                f"IN|{po_id_from_file1}:MRGFPRE00",
-                                f"IN|{po_id_from_file1}:MRGFPRE00",
+                                ruleset_names[3],
+                                ruleset_names[3],
                                 "",
                                 ""
                             ]
@@ -300,28 +307,28 @@ def process_files(file1, file2):
                         # Create Rules-Price
                         rules_price_data ={
                            "Ruleset ShortName": [
-                                f"{po_id_from_file1}:MRPRE00",
-                                f"{po_id_from_file1}:MRPRE00",
-                                f"{po_id_from_file1}:MRACT00",
-                                f"{po_id_from_file1}:MRACT00",
-                                f"{po_id_from_file1}:MR00000",
-                                f"{po_id_from_file1}:MR00000",
-                                f"{po_id_from_file1}:MRGFPRE00",
-                                f"{po_id_from_file1}:MRGFACT00",
-                                f"{po_id_from_file1}:MRGFACT00",
-                                f"{po_id_from_file1}:MRGF00000",
+                                ruleset_names[0],
+                                ruleset_names[0],
+                                ruleset_names[1],
+                                ruleset_names[1],
+                                ruleset_names[2],
+                                ruleset_names[2],
+                                ruleset_names[3],
+                                ruleset_names[4],
+                                ruleset_names[4],
+                                ruleset_names[5],
                             ],
                             "Variable Name": ["REGISTRATION"] * 3 + ["DORMANT"] + ["REGISTRATION"] * 4 + ["DORMANT"] + ["REGISTRATION"],
                             "Channel":[
                                 row["Channel Free"],
                                 "DEFAULT",
                                 "DEFAULT",
-                                f"{po_id_from_file1}:MRPRE00",
+                                ruleset_names[0],
                                 row["Channel Free"],
                                 "DEFAULT",
                                 "DEFAULT",
                                 "DEFAULT",
-                                f"{po_id_from_file1}:MRPRE00",
+                                ruleset_names[3],
                                 "DEFAULT"
                             ],
                             "Price": [
@@ -356,14 +363,7 @@ def process_files(file1, file2):
 
                         # Create Rules-Renewal
                         rules_renewal_data = {
-                            "Ruleset ShortName": [
-                                f"{po_id_from_file1}:MRPRE00",
-                                f"{po_id_from_file1}:MRACT00",
-                                f"{po_id_from_file1}:MR00000",
-                                f"{po_id_from_file1}:MRGFPRE00",
-                                f"{po_id_from_file1}:MRGFACT00",
-                                f"{po_id_from_file1}:MRGF00000"
-                            ],
+                            "Ruleset ShortName": ruleset_names,
                             "PO ID": [po_id_from_file1] * 6,
                             "Flag Auto": [
                                 "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP",
@@ -399,13 +399,7 @@ def process_files(file1, file2):
 
                         # Create Case-Type
                         case_type_data = {
-                            "RulesetName": [
-                                f"{po_id_from_file1}:MRPRE00",
-                                f"{po_id_from_file1}:MRACT00",
-                                f"{po_id_from_file1}:MR00000",
-                                f"{po_id_from_file1}:MRGFPRE00",
-                                f"{po_id_from_file1}:MRGFACT00",
-                                f"{po_id_from_file1}:MRGF00000"                            ],
+                            "RulesetName": ruleset_names,
                             "Case_Type": ["REGISTRATION, UNREG"] *6
                         }
 
@@ -469,9 +463,9 @@ def process_files(file1, file2):
                         # Repeat Quota data 6 times with ruleset
                         if safe_int(row.get("Quota", 0)) > 0:
                             quota_value = safe_int(row["Quota"]) * 1073741824  # Convert quota to bytes
-                            for suffix in ruleset_suffixes:
+                            for ruleset_name in ruleset_names:
                                 library_addon_da_data.append({
-                                    "Ruleset ShortName": f"{po_id_from_file1}_{suffix}",  # Append ruleset suffix to POID
+                                    "Ruleset ShortName": ruleset_name,  # Append ruleset suffix to POID
                                     "Parentpoid": po_id_from_file1,
                                     "Quota Name": "DataRoaming",  # Fixed string "DataRoaming"
                                     "daid": "30100",  # Fixed string "30100"
@@ -498,7 +492,7 @@ def process_files(file1, file2):
                                 voice_value = safe_int(row["Voice"]) * 60  # Convert voice value to seconds
                                 for suffix in ruleset_suffixes:
                                     library_addon_da_data.append({
-                                        "Ruleset ShortName": f"{po_id_from_file1}_{suffix}",  # Append ruleset suffix to POID
+                                        "Ruleset ShortName": ruleset_name,  # Append ruleset suffix to POID
                                         "Parentpoid": parentpoid,
                                         "Quota Name": "VoiceRoamingCallBackHome",  # Fixed string "DataRoaming"
                                         "daid": "30194",  # Fixed string "30100"
@@ -541,18 +535,13 @@ def process_files(file1, file2):
                         # Create StandAlone sheet
                         standalone_data= {
                             "Ruleset ShortName": [
-                                f"{po_id_from_file1}:MRPRE00",
-                                f"{po_id_from_file1}:MRPRE00",
-                                f"{po_id_from_file1}:MRACT00",
-                                f"{po_id_from_file1}:MRACT00",
-                                f"{po_id_from_file1}:MR00000",
-                                f"{po_id_from_file1}:MR00000",
-                                f"{po_id_from_file1}:MRGFPRE00",
-                                f"{po_id_from_file1}:MRGFPRE00",
-                                f"{po_id_from_file1}:MRGFACT00",
-                                f"{po_id_from_file1}:MRGFACT00",
-                                f"{po_id_from_file1}:MRGF00000",
-                                f"{po_id_from_file1}:MRGF00000"                           ],
+                                ruleset_names[0], ruleset_names[0],  # 00PRE00, 00PRE00
+                                ruleset_names[1], ruleset_names[1],  # 00ACT00, 00ACT00 (repeated)
+                                ruleset_names[2], ruleset_names[2],  # remaining_rule, remaining_rule
+                                ruleset_names[3], ruleset_names[3],  # GFPRE00, GFPRE00
+                                ruleset_names[4], ruleset_names[4],  # GFACT00, GFACT00
+                                ruleset_names[5], ruleset_names[5]   # GF00, GF00                          
+                            ],
                             "PO ID": [po_id_from_file1] * 12,
                             "Scenarios": [
                                 "AddonActivation|AddonGiftActivation|AddonGiftRebuy|AddonRebuy",
@@ -609,14 +598,7 @@ def process_files(file1, file2):
                         # Create UMB Push Category sheet
                         umb_push_category_data= {
                             "POID": [po_id_from_file1] * 6,
-                            "MRID": [
-                                f"{po_id_from_file1}:MRPRE00",
-                                f"{po_id_from_file1}:MRACT00",
-                                f"{po_id_from_file1}:MR00000",
-                                f"{po_id_from_file1}:MRGFPRE00",
-                                f"{po_id_from_file1}:MRGFACT00",
-                                f"{po_id_from_file1}:MRGF00000"
-                            ],
+                            "MRID": ruleset_names,
                             "GROUP_CATEGORY": ["Pkt Internet"] * 6,
                             "SHORTCODE": [str("122")] * 6,
                             "SHOWUNIT": ["SHOW"] * 6
