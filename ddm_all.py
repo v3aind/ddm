@@ -64,7 +64,7 @@ def get_ruleset_names(file5_df, po_id):
     return ruleset_list
 
 # Function to process the uploaded files and provide download link
-def process_files(file1, file2):
+def process_files(file1, file2, file5):
     if file1 is not None and file2 is not None:
         # Load input files
         file1_df = pd.read_excel(file1)
