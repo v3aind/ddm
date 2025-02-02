@@ -19,9 +19,9 @@ def process_files(file1, file2, file5):
 # Streamlit app
 st.title('DDM File Generator (Roaming SC with Gift)')
 
-file1 = st.file_uploader("Upload File 1 (Excel)", type=["xls", "xlsx"])
-file2 = st.file_uploader("Upload File 2 (Excel)", type=["xls", "xlsx"])
-file5 = st.file_uploader("Upload File 5 (Excel)", type=["xls", "xlsx"])  # Ensure this is correctly uploaded
+file1 = st.file_uploader("Upload Roaming SC Completion (Excel)", type=["xls", "xlsx"])
+file2 = st.file_uploader("Upload Product Spec Roaming (Excel)", type=["xls", "xlsx"])
+file5 = st.file_uploader("Upload All MRID (Excel)", type=["xls", "xlsx"])  # Ensure this is correctly uploaded
 
 if st.button("Process Files"):
     process_files(file1, file2, file5)
