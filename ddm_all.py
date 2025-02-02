@@ -25,7 +25,7 @@ def get_ruleset_names(file5_df, po_id):
     remaining_rule = None
 
     for _, row in po_rulesets.iterrows():
-        ruleset_name = row["Ruleset_ShotName"]
+        ruleset_name = row["Ruleset_ShortName"]
         
         for pattern in patterns:
             if pattern in ruleset_name:
