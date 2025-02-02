@@ -355,7 +355,7 @@ def process_files(file1, file2):
                                 "",
                                 "12200001178102" 
                             ],
-                            "Resultant Shortname": [""] * 3 + [f"{po_id_from_file1}:MRPRE00"] + [""] * 4 + [f"{po_id_from_file1}:MRPRE00"] + [""]
+                            "Resultant Shortname": [""] * 3 + ruleset_names[0] + [""] * 4 + ruleset_names[3] + [""]
                         }
 
                         rules_price_df = pd.DataFrame(rules_price_data)
