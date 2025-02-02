@@ -301,14 +301,14 @@ def process_files(file1, file2, file5):
                             "PREACT_SUBS": [
                                 "",
                                 "",
-                                f"IN|{ruleset_names[0]}"
-                                f"IN|{ruleset_names[0]}"
+                                f"IN|{ruleset_names[0]}",
+                                f"IN|{ruleset_names[0]}",
                                 "",
                                 "",
                                 "",
                                 "",
-                                f"IN|{ruleset_names[3]}"
-                                f"IN|{ruleset_names[3]}"
+                                f"IN|{ruleset_names[3]}",
+                                f"IN|{ruleset_names[3]}",
                                 "",
                                 ""
                             ]
