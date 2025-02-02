@@ -639,4 +639,4 @@ def process_files(file1, file2, file5):
 
 # Call the process function if both files are uploaded
 if file1 is not None and file2 is not None:
-    process_files(file1, file2)
+    process_files(file1, file2, file5)
