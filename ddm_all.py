@@ -332,7 +332,6 @@ def process_files(file1, file2, file5):
                                 ruleset_names[5],
                             ],
                             "Variable Name": ["REGISTRATION"] * 3 + ["DORMANT"] + ["REGISTRATION"] * 4 + ["DORMANT"] + ["REGISTRATION"],
-                            "PO ID": [po_id_from_file1] * 10,
                             "Channel":[
                                 row["Channel Free"],
                                 "DEFAULT",
