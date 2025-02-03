@@ -527,7 +527,7 @@ def process_files(file1, file2, file5):
                             library_addon_da_df = pd.DataFrame(columns=library_addon_headers)
 
                         # Write to Excel
-                        library_addon_da_df.to_excel(writer, sheet_name="Library AddOn_DA", index=False)
+                        library_addon_da_df.to_excel(writer, sheet_name="Library-Addon-DA", index=False)
 
                         # Create empty Rules-Messages sheet
                         rules_messages_headers = ["PO ID","Ruleset ShortName","Order Status","Order Type","Sender Address","Channel","Message Content Index","Message Content"]
@@ -590,7 +590,7 @@ def process_files(file1, file2, file5):
                         }
 
                         standalone_df=pd.DataFrame(standalone_data)
-                        standalone_df.to_excel(writer, sheet_name="StandAlone", index=False)
+                        standalone_df.to_excel(writer, sheet_name="Standalone", index=False)
 
                         # Create Rebuy Association sheet - empty need to populate for each country after MR ID fixed
                         rebuy_association_headers= ["Target PO ID","Target Ruleset ShortName","Target MPP","Target Group","Service Type","Rebuy Price","Allow Rebuy","Rebuy Option","Product Family","Source PO ID","Source Ruleset ShortName","Source MPP","Source Group","Vice Versa Consent","Status"]
@@ -603,7 +603,7 @@ def process_files(file1, file2, file5):
                             rebuy_association_df = pd.DataFrame(columns=rebuy_association_headers)
 
                         # Write to Excel
-                        rebuy_association_df.to_excel(writer, sheet_name="Rebuy Association", index=False)
+                        rebuy_association_df.to_excel(writer, sheet_name="Rebuy-Association", index=False)
 
                         # Create UMB Push Category sheet
                         umb_push_category_data= {
