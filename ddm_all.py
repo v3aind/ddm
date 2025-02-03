@@ -332,6 +332,7 @@ def process_files(file1, file2, file5):
                                 ruleset_names[5],
                             ],
                             "Variable Name": ["REGISTRATION"] * 3 + ["DORMANT"] + ["REGISTRATION"] * 4 + ["DORMANT"] + ["REGISTRATION"],
+                            "PO ID": [po_id_from_file1] * 12,
                             "Channel":[
                                 row["Channel Free"],
                                 "DEFAULT",
@@ -395,7 +396,7 @@ def process_files(file1, file2, file5):
                                 int(row["Package Validity"]) if pd.notna(row["Package Validity"]) else 0
                             ],
                             "Period UOM": ["DAY"] * 6,
-                            "Flag Charge": ["FALSE"] * 6,
+                            "Flag Charge": ["TRUE"] * 6,
                             "Flag Suspend": ["FALSE"] * 6,
                             "Suspend Period": [""] * 6,
                             "Suspend UOM": [""] * 6,
@@ -607,7 +608,7 @@ def process_files(file1, file2, file5):
 
                         # Create UMB Push Category sheet
                         umb_push_category_data= {
-                            "Ruleset ShortName": [po_id_from_file1] * 6,
+                            "Ruleset ShortName": ruleset_names,
                             "Coherence Key": ruleset_names,
                             "Group Category": ["Pkt Internet"] * 6,
                             "Short Code": [str("122")] * 6,
