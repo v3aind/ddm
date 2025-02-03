@@ -476,9 +476,9 @@ def process_files(file1, file2, file5):
                             for i in range(len(ruleset_names)):
                                 library_addon_da_data.append({
                                     "Ruleset ShortName": ruleset_names[i],  # Append ruleset suffix to POID
-                                    "Parentpoid": po_id_from_file1,
+                                    "PO ID": po_id_from_file1,
                                     "Quota Name": "DataRoaming",  # Fixed string "DataRoaming"
-                                    "daid": "30100",  # Fixed string "30100"
+                                    "DA ID": "30100",  # Fixed string "30100"
                                     "Internal Description Bahasa": "Kuota Roaming",  # Fixed string "DataRoaming"
                                     "External Description Bahasa": "Kuota Roaming",  # Fixed string "DataRoaming"
                                     "Internal Description English": "Roaming Quota",  # Fixed string "DataRoaming"
@@ -503,9 +503,9 @@ def process_files(file1, file2, file5):
                                 for i in range(len(ruleset_names)):
                                     library_addon_da_data.append({
                                         "Ruleset ShortName": ruleset_names[i],  # Append ruleset suffix to POID
-                                        "Parentpoid": parentpoid,
+                                        "Po ID": parentpoid,
                                         "Quota Name": "VoiceRoamingCallBackHome",  # Fixed string "DataRoaming"
-                                        "daid": "30194",  # Fixed string "30100"
+                                        "DA ID": "30194",  # Fixed string "30100"
                                         "Internal Description Bahasa": "Kuota Nelp ke IM3 dan TRI",  # Fixed string "DataRoaming"
                                         "External Description Bahasa": "Kuota Nelp ke IM3 dan TRI",  # Fixed string "DataRoaming"
                                         "Internal Description English": "Free Call",  # Fixed string "DataRoaming"
