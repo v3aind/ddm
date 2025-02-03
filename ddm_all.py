@@ -611,7 +611,7 @@ def process_files(file1, file2, file5):
                             "Coherence Key": ruleset_names,
                             "Group Category": ["Pkt Internet"] * 6,
                             "Short Code": [str("122")] * 6,
-                            "Show Unit": ["SHOW"] * 6
+                            "Show Unit": ["SHOW"] * 6,
                             "Action": [""] * 6
                         }
 
