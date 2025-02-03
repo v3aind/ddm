@@ -607,11 +607,12 @@ def process_files(file1, file2, file5):
 
                         # Create UMB Push Category sheet
                         umb_push_category_data= {
-                            "POID": [po_id_from_file1] * 6,
-                            "MRID": ruleset_names,
-                            "GROUP_CATEGORY": ["Pkt Internet"] * 6,
-                            "SHORTCODE": [str("122")] * 6,
-                            "SHOWUNIT": ["SHOW"] * 6
+                            "Ruleset ShortName": [po_id_from_file1] * 6,
+                            "Coherence Key": ruleset_names,
+                            "Group Category": ["Pkt Internet"] * 6,
+                            "Short Code": [str("122")] * 6,
+                            "Show Unit": ["SHOW"] * 6
+                            "Action": [""] * 6
                         }
 
                         umb_push_category_df=pd.DataFrame(umb_push_category_data)
