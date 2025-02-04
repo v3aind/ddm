@@ -126,11 +126,22 @@ def process_files(file1, file2, file5):
 
                         # Create the "Ruleset-Header" sheet
                         ruleset_header_data = {
-                            "Ruleset ShortName": ruleset_names,
-                            "Keyword": [row["Keywords"], "AKTIF_P26", row["Keywords"],row["Keywords"], "AKTIF_P26", row["Keywords"]],
-                            "Keyword Type": ["", "", "", "", "", ""],
+                            "Ruleset ShortName": [
+                                ruleset_names[0],  # 00PRE00
+                                ruleset_names[1],  # 00ACT00 
+                                ruleset_names[1],  # 00ACT00
+                                ruleset_names[2],  # remaining_rule
+                                ruleset_names[3],  # GFPRE00
+                                ruleset_names[4],  # GFACT00
+                                ruleset_names[4],  # GFACT00
+                                ruleset_names[5],  # GF00
+                            ],
+                            "Keyword": [row["Keywords"], "AKTIF_P26", "AKTIF", row["Keywords"],row["Keywords"], "AKTIF_P26", "AKTIF", row["Keywords"]],
+                            "Keyword Type": ["", "", "", "", "", "", "", ""],
                             "Commercial Name Bahasa": [
                                 row["Commercial Name"], 
+                                row["Commercial Name"], 
+                                row["Commercial Name"],
                                 row["Commercial Name"], 
                                 row["Commercial Name"],
                                 row["Commercial Name"], 
@@ -140,15 +151,19 @@ def process_files(file1, file2, file5):
                             "Commercial Name English": [
                                 row["Commercial Name"], 
                                 row["Commercial Name"], 
+                                row["Commercial Name"],
+                                row["Commercial Name"], 
                                 row["Commercial Name"], 
                                 row["Commercial Name"], 
                                 row["Commercial Name"],
                                 row["Commercial Name"]
                             ],
-                            "Variant Type": ["00", "00", "00", "GF", "GF", "GF"],
-                            "SubVariant Type": ["PRE00", "ACT00", "00000", "PRE00", "ACT00", "00000"],
+                            "Variant Type": ["00", "00", "00", "00", "GF", "GF", "GF", "GF"],
+                            "SubVariant Type": ["PRE00", "ACT00", "ACT00", "00000", "PRE00", "ACT00", "ACT00", "00000"],
                             "SimCard Validity": [
                                 row["SIM Action"], 
+                                row["SIM Action"], 
+                                row["SIM Action"],
                                 row["SIM Action"], 
                                 row["SIM Action"],
                                 row["SIM Action"], 
@@ -159,12 +174,16 @@ def process_files(file1, file2, file5):
                                 str(int(row["SIM Validity"])) if pd.notna(row["SIM Validity"]) else "",
                                 str(int(row["Package Validity"])) if pd.notna(row["Package Validity"]) else "",
                                 str(int(row["Package Validity"])) if pd.notna(row["Package Validity"]) else "",
+                                str(int(row["Package Validity"])) if pd.notna(row["Package Validity"]) else "",
                                 str(int(row["SIM Validity"])) if pd.notna(row["SIM Validity"]) else "",
+                                str(int(row["Package Validity"])) if pd.notna(row["Package Validity"]) else "",
                                 str(int(row["Package Validity"])) if pd.notna(row["Package Validity"]) else "",
                                 str(int(row["Package Validity"])) if pd.notna(row["Package Validity"]) else ""
                             ],
-                            "MaxLife Time": ["360", "360", "360", "360", "360", "360"],
+                            "MaxLife Time": ["360", "360", "360", "360", "360", "360", "360", "360"],
                             "UPCC Package Code": [
+                                file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].iloc[0] if not file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].empty else "",
+                                file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].iloc[0] if not file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].empty else "",
                                 file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].iloc[0] if not file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].empty else "",
                                 file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].iloc[0] if not file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].empty else "",
                                 file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].iloc[0] if not file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].empty else "",
@@ -172,8 +191,10 @@ def process_files(file1, file2, file5):
                                 file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].iloc[0] if not file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].empty else "",
                                 file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].iloc[0] if not file1_df.loc[file1_df['Keyword'] == keyword, 'UPCCCode'].empty else ""
                             ],
-                            "Claim Command": ["", "", "", "", "", ""],
+                            "Claim Command": ["", "", "", "", "", "", "", ""],
                             "Flag Auto": [
+                                "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP",
+                                "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP",
                                 "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP",
                                 "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP",
                                 "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP",
@@ -181,22 +202,24 @@ def process_files(file1, file2, file5):
                                 "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP",
                                 "NO-KEEP" if row["Renewal"] == "No" else "YES-KEEP"
                             ],
-                            "Progression Renewal": ["", "", "", "", "", ""],
-                            "Reminder Group Id": ["GROUP18", "GROUP18", "GROUP18", "GROUP18", "GROUP18", "GROUP18"],
+                            "Progression Renewal": ["", "", "", "", "", "", "", ""],
+                            "Reminder Group Id": ["GROUP18", "GROUP18", "GROUP18", "GROUP18", "GROUP18", "GROUP18", "GROUP18", "GROUP18"],
                             "Amount": [
                                 int(float(str(row["PricePre"]).replace(",", ""))) if pd.notna(row["PricePre"]) else 0,
                                 0,
+                                0,
                                 int(float(str(row["PricePre"]).replace(",", ""))) if pd.notna(row["PricePre"]) else 0,
                                 int(float(str(row["PricePre"]).replace(",", ""))) if pd.notna(row["PricePre"]) else 0,
                                 0,
+                                0,
                                 int(float(str(row["PricePre"]).replace(",", ""))) if pd.notna(row["PricePre"]) else 0
                             ],
-                            "Reg Subaction": ["1", "1", "1", "1", "1", "1"]
+                            "Reg Subaction": ["1", "1", "1", "1", "1", "1", "1", "1"]
                         }
 
                         ruleset_header_df = pd.DataFrame(ruleset_header_data)
                         ruleset_header_df.to_excel(writer, sheet_name="Ruleset-Header", index=False)
-
+                        
                         # Ensure MCC is treated as a string and split by commas
                         mcc_raw = str(row['MCC'])  # Convert MCC to string
                         mcc_values = mcc_raw.split(',')  # Split by commas
