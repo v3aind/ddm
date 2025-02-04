@@ -616,7 +616,7 @@ def process_files(file1, file2, file5):
                         standalone_df.to_excel(writer, sheet_name="Standalone", index=False)
 
                         # Create Rebuy Association sheet - empty need to populate for each country after MR ID fixed
-                        rebuy_association_headers= ["Target PO ID","Target Ruleset ShortName","Target MPP","Target Group","Service Type","Rebuy Price","Allow Rebuy","Rebuy Option","Product Family","Source PO ID","Source Ruleset ShortName","Source MPP","Source Group","Vice Versa Consent","Status"]
+                        rebuy_association_headers= ["Target PO ID","Target Ruleset ShortName","Target MPP","Target Group","Service Type","Rebuy Price","Allow Rebuy","Rebuy Option","Product Family","Source PO ID","Source Ruleset ShortName","Source MPP","Source Group","Vice Versa Consent","Action"]
                         rebuy_association_data = []  # Initialize as an empty list to store rows
 
                        # Create DataFrame
