@@ -639,7 +639,7 @@ def process_files(file1, file2, file5):
                         }
 
                         umb_push_category_df=pd.DataFrame(umb_push_category_data)
-                        umb_push_category_df.to_excel(writer, sheet_name="UMB Push Category", index=False)
+                        umb_push_category_df.to_excel(writer, sheet_name="UMB-Push-Category", index=False)
 
                     # Move the file pointer to the beginning of the file so it can be downloaded
                     output.seek(0)
