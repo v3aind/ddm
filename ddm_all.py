@@ -420,7 +420,7 @@ def process_files(file1, file2, file5):
                         case_type_df.to_excel(writer, sheet_name="Case-Type", index=False)
 
                         # Create the "Offer-DA" sheet
-                        headers = ["Parentpoid", "Offerid", "daid", "Benefit Name", "Value", "Zone"]
+                        headers = ["PO ID", "Offerid", "DA ID", "Benefit Name", "Value", "Zone"]
                         offer_da_data = []  # Initialize as an empty list to store rows
 
                         def safe_int(value, default=0):
@@ -434,9 +434,9 @@ def process_files(file1, file2, file5):
                         # Check and add data if quota > 0
                         if safe_int(row.get("Quota", 0)) > 0:
                             offer_da_data.append({
-                                "Parentpoid": po_id_from_file1,
+                                "PO ID": po_id_from_file1,
                                 "Offerid": "",  # Empty string for Offerid
-                                "daid": "30100",  # Fixed string "30100"
+                                "DA ID": "30100",  # Fixed string "30100"
                                 "Benefit Name": "DataRoaming",  # Fixed string "DataRoaming"
                                 "Value": safe_int(row["Quota"]) * 1073741824,  # quota * 1 GB in bytes
                                 "Zone": "NA",  # Empty string for Zone
@@ -449,9 +449,9 @@ def process_files(file1, file2, file5):
                                 package_validity = str(row.get("Package Validity", "")).strip()
                                 parentpoid = "PO_ADO_CALLBACKHOME_" + poid_parts[4] + "_" + package_validity + "D"
                                 offer_da_data.append({
-                                    "Parentpoid": parentpoid,
+                                    "PO ID": parentpoid,
                                     "Offerid": "",  # Empty string for Offerid
-                                    "daid": "30194",  # Assuming a different daid for Voice
+                                    "DA ID": "30194",  # Assuming a different daid for Voice
                                     "Benefit Name": "VoiceRoamingCallBackHome",  # Fixed string "VoiceRoaming"
                                     "Value": safe_int(row["Voice"]) * 60,  # Voice value times 60 in seconds
                                     "Zone": "NA",  # Empty string for Zone
