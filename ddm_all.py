@@ -278,14 +278,14 @@ def process_files(file1, file2, file5):
                             "ROAMING": [
                                 "",
                                 "",
-                                f"IN|{mcc_prefixed},{cc_prefixed},{row['MCC_hex']}",
-                                f"IN|{mcc_prefixed},{cc_prefixed},{row['MCC_hex']}",
+                                f"IN|{mcc_prefixed},{cc_prefixed},{str{row['MCC_hex'].replace(' ', '')}}",
+                                f"IN|{mcc_prefixed},{cc_prefixed},{str{row['MCC_hex'].replace(' ', '')}}",
                                 f"IN|{str(row['MCC_hex']).replace(' ', '')}",
                                 f"IN|{str(row['MCC_hex']).replace(' ', '')}",
                                 "",
                                 "",
-                                f"IN|{mcc_prefixed},{cc_prefixed},{row['MCC_hex']}",
-                                f"IN|{mcc_prefixed},{cc_prefixed},{row['MCC_hex']}",
+                                f"IN|{mcc_prefixed},{cc_prefixed},{str{row['MCC_hex'].replace(' ', '')}}",
+                                f"IN|{mcc_prefixed},{cc_prefixed},{str{row['MCC_hex'].replace(' ', '')}}",
                                 f"IN|{str(row['MCC_hex']).replace(' ', '')}",
                                 f"IN|{str(row['MCC_hex']).replace(' ', '')}"
                             ],
